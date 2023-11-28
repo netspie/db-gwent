@@ -33,7 +33,7 @@ export default function Home() {
     <>
     <Header></Header>
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      Hello Dope!
+      <h1>Hello Dope!</h1>
       <Link href="/info/87">Link</Link>
     </main>
     </>
