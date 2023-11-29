@@ -15,9 +15,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
+  const htmlClass = `min-h-full h-full`
+  const bodyClass = `${inter.className} min-h-full h-full`
+
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className={htmlClass}>
+      <body className={bodyClass}>
         <AppWrapper>
           {children}
         </AppWrapper>

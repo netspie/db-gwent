@@ -16,8 +16,10 @@ export default async function Games({params}: any) {
 
   return (
     <>
-    <div>
-      <h1>{game.name}</h1>
+    <div className="flex items-center">
+      <div className="">
+        <h1>{game.name}</h1>
+      </div>
     </div>
     </>
   )

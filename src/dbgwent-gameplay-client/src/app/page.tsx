@@ -32,7 +32,6 @@ export default function Home() {
   }
 
   async function savePost(data: FormData) {
-    'use server'
 
     const title = data.get('title')
     const description = data.get('description')
@@ -40,8 +39,14 @@ export default function Home() {
     const response = await fetch('http://localhost:3000/api/games',
     {
       method: 'POST',
-      body: JSON.stringify({ title, description })
+      body: JSON.stringify({ title, description }),
+      cache: 'no-cache'
     })
+
+    if (response.ok) {
+      const posts = await response.json()
+      console.log(posts)
+    }
   }
 
   return (
