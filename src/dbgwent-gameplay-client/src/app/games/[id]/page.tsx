@@ -5,10 +5,10 @@ import CardRow from "@/components/CardRow";
 import CardRowBottom from "@/components/CardRowBottom";
 import CardRowPool from "@/components/CardRowPool";
 import HeroPanel from "@/components/HeroPanel";
-import React from "react";
+import React, { useState } from "react";
 
 export default function Game() {
-  const [hydrated, setHydrated] = React.useState(false);
+  const [hydrated, setHydrated] = useState(false);
     React.useEffect(() => {
         setHydrated(true);
     }, []);

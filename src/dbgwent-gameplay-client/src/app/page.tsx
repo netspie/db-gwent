@@ -51,15 +51,22 @@ export default function Home() {
 
   return (
     <>
-    <Header></Header>
-    <main className="flex min-h-screen flex-col items-center p-24">
-      <h1>Hello Dope! {hello}</h1>
-      <Link href="/info/87">Link</Link>
-      <form action={savePost} className="grid">
-        <input className="p-2 border" name="title" type="text" />
-        <textarea className="p-2 border" name="description" />
-        <button className="px-4 py-5 text-black bg-sky-500" type="submit">Submit</button>
-      </form>
+    <main className="flex w-full h-full items-center justify-center flex-col gap-10">
+      <section className="flex flex-col gap-3 items-center">
+        <h1 className="font-bold">Gwent DB</h1>
+        <h4 className="">Gwent Card Game in Dragon Ball Theme</h4>
+      </section>
+      <Link href="/games/test" className="px-10 py-2 text-white bg-red-700 font-bold rounded-md">Play</Link>
+      <div>
+        <div className="flex gap-3">
+          <label className="">Playing: </label>
+          <span className="">234</span>
+        </div>
+        <div className="flex gap-3">
+          <label className="">Waiting: </label>
+          <span className="">473</span>
+        </div>
+      </div>
     </main>
     </>
   );
