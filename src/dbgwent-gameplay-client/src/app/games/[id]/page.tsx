@@ -1,109 +1,66 @@
+"use client";
+
+import Card from "@/components/Card";
+import CardRow from "@/components/CardRow";
+import CardRowBottom from "@/components/CardRowBottom";
+import CardRowPool from "@/components/CardRowPool";
 
 export default function Game() {
   return (
     <div className="flex w-full min-h-full justify-center gap-2">
-      <div className="w-[550px] min-h-full bg-gray-900 hidden xl:block"></div>
-      <div className="flex flex-col items-center justify-center gap-2 w-full">
-          <div className="flex bg-blue-900 w-full h-full overflow-auto">
-            <div className="bg-gray-500 min-w-[80px] h-full hidden md:flex"></div>
-            <div className="flex gap-1 md:gap-3 bg-blue-900 w-full h-full justify-center">
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-            </div>
-          </div>
-          <div className="flex bg-blue-900 w-full h-full overflow-auto">
-            <div className="bg-gray-500 min-w-[80px] h-full hidden md:flex"></div>
-            <div className="flex gap-1 md:gap-3 bg-blue-900 w-full h-full justify-center">
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-            </div>
-          </div>
-          <div className="flex bg-blue-900 w-full h-full overflow-auto">
-            <div className="bg-gray-500 min-w-[80px] h-full hidden md:flex"></div>
-            <div className="flex gap-1 md:gap-3 bg-blue-900 w-full h-full justify-center">
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-            </div>
-          </div>
-          <div className="flex bg-blue-900 w-full h-full overflow-auto">
-            <div className="bg-gray-500 min-w-[80px] h-full hidden md:flex"></div>
-            <div className="flex gap-1 md:gap-3 bg-blue-900 w-full h-full justify-center">
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-            </div>
-          </div>
-          <div className="flex bg-blue-900 w-full h-full overflow-auto">
-            <div className="bg-gray-500 min-w-[80px] h-full hidden md:flex"></div>
-            <div className="flex gap-1 md:gap-3 bg-blue-900 w-full h-full justify-center">
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-            </div>
-          </div>
-          <div className="flex bg-blue-900 w-full h-full overflow-auto">
-            <div className="bg-gray-500 min-w-[80px] h-full hidden md:flex"></div>
-            <div className="flex gap-1 md:gap-3 bg-blue-900 w-full h-full justify-center">
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-              <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-            </div>
-          </div>
-          <div className="flex gap-1 md:gap-3 justify-center bg-green-900 w-full h-full md:p-5 overflow-auto">
-            <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-            <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-            <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-            <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-            <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-            <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-            <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-            <div className="bg-gray-900 min-h-full" style={{ aspectRatio: 1 / 1.5 }}></div>
-          </div>
+      <div className="w-[550px] min-h-full bg-gray-900 hidden md:block"></div>
+      <div className="flex flex-col items-center justify-center gap-1 w-full overflow-hidden">
+        <CardRow>
+          <Card />
+          <Card />
+          <Card />
+        </CardRow>
+        <CardRow>
+          <Card />
+          <Card />
+        </CardRow>
+        <CardRow>
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+        </CardRow>
+        <CardRow>
+          <Card />
+        </CardRow>
+        <CardRow>
+          <Card />
+          <Card />
+        </CardRow>
+        <CardRow>
+          <Card />
+          <Card />
+          <Card />
+        </CardRow>
+        <CardRowBottom>
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+        </CardRowBottom>
       </div>
-      <div className="min-h-full flex-col w-[550px] bg-red-900 hidden xl:flex">
-          <div className="bg-gray-900 w-full h-[225px]"></div>
-          <div className="w-full h-full"></div>
-          <div className="bg-gray-900 w-full h-[195px]"></div>
+      <div className="min-h-full flex-col gap-1 w-[250px] bg-red-900 hidden lg:flex">
+        <CardRowPool noPadding={true}>
+          <Card isReversed={true} />
+          <Card isReversed={true} />
+        </CardRowPool>
+        <CardRow />
+        <CardRow />
+        <CardRow />
+        <CardRow />
+        <CardRow />
+        <CardRowPool>
+          <Card isReversed={true} />
+          <Card isReversed={true} />
+        </CardRowPool>
       </div>
     </div>
-  )
+  );
 }
