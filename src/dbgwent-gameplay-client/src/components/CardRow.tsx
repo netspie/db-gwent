@@ -14,7 +14,7 @@ export default function CardRow(props: CardRowProps) {
   return (
     <div
       ref={ref}
-      className="relative flex w-full h-full bg-blue-900"
+      className="relative flex w-full h-full "
     >
       {/* <div className="bg-gray-500 min-w-[80px] h-full hidden md:flex" style={{ aspectRatio: 1 / 1.5 }} ></div> */}
       <div
@@ -24,7 +24,7 @@ export default function CardRow(props: CardRowProps) {
         {props.children}
       </div>
       <div
-        className="absolute min-h-[20%] bg-red-300 left-0 top-full -translate-y-full md:-translate-x-1/2 md:top-1/2 md:-translate-y-1/2 flex items-center justify-center z-10000"
+        className="absolute min-h-[20%] bg-slate-300 left-0 top-full -translate-y-full md:-translate-x-1/2 md:top-1/2 md:-translate-y-1/2 flex items-center justify-center z-10000"
         style={{ aspectRatio: 1 / 1 }}
       >
         <span

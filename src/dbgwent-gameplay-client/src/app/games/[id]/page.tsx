@@ -4,6 +4,7 @@ import Card from "@/components/Card";
 import CardRow from "@/components/CardRow";
 import CardRowBottom from "@/components/CardRowBottom";
 import CardRowPool from "@/components/CardRowPool";
+import HeroPanel from "@/components/HeroPanel";
 import React from "react";
 
 export default function Game() {
@@ -17,8 +18,11 @@ export default function Game() {
     }
 
   return (
-    <div className="flex w-full min-h-full justify-center gap-1 overflow-hidden">
-      <div className="w-[550px] min-h-full bg-gray-900 hidden md:block"></div>
+    <div className="flex w-full min-h-full justify-center gap-1 overflow-hidden md:py-3 bg-slate-200">
+      <div className="w-[650px] min-h-full gap-1 flex-col hidden md:flex">
+        <HeroPanel isEnemy={true} />
+        <HeroPanel isEnemy={false}/>
+      </div>
       <div className="row-group flex flex-col grow-0 items-center justify-center gap-1 w-full overflow-visible" style={{ overflowClipMargin: '100px' }}>
         <CardRow>
           <Card />
@@ -30,14 +34,6 @@ export default function Game() {
           <Card />
         </CardRow>
         <CardRow>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
           <Card />
           <Card />
           <Card />
@@ -75,16 +71,16 @@ export default function Game() {
           <Card />
         </CardRowBottom>
       </div>
-      <div className="min-h-full shrink-0 flex-col gap-1 w-[250px] bg-red-900 hidden lg:flex">
+      <div className="min-h-full shrink-0 flex-col gap-1 w-[250px] hidden lg:flex">
         <CardRowPool noPadding={true}>
           <Card isReversed={true} />
           <Card isReversed={true} />
         </CardRowPool>
-        <CardRow />
-        <CardRow />
-        <CardRow />
-        <CardRow />
-        <CardRow />
+        <div className="h-full"></div>
+        <div className="h-full"></div>
+        <div className="h-full"></div>
+        <div className="h-full"></div>
+        <div className="h-full"></div>
         <CardRowPool>
           <Card isReversed={true} />
           <Card isReversed={true} />

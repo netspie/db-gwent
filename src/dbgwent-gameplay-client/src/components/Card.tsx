@@ -17,17 +17,17 @@ export default function Card(props: CardProps) {
       onMouseDown={() => props.onClickChanged && props?.onClickChanged(true)}
       onMouseOut={() => props.onClickChanged && props?.onClickChanged(false)}
       ref={ref}
-      className={`relative min-h-full ${!props.isReversed && "cursor-pointer"} `}
+      className={`relative min-h-full ${!props.isReversed && "cursor-pointer"}`}
       style={{ aspectRatio: 1 / 1.5 }}
     >
       <div
         className={`${
-          !props.isReversed && "duration-100 opacity-80 hover:opacity-100" //hover:md:scale-[120%]
-        } h-full w-full bg-slate-600`}
+          !props.isReversed && 'duration-100 opacity-80 hover:opacity-100' //hover:md:scale-[120%]
+        } h-full w-full bg-slate-600 rounded-lg`}
       >
         {!props.isReversed && (
           <div
-            className="relative max-w-[30%] bg-white"
+            className="relative max-w-[30%] bg-slate-200"
             style={{ aspectRatio: 1 / 1 }}
           >
             <span
