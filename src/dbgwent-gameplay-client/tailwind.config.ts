@@ -16,5 +16,11 @@ const config: Config = {
     },
   },
   plugins: [],
+  "tailwind-class-sorter.classRegex": {
+    "rescript": [
+      "className\\w*?=\\w*(\"[\\s\\S]+?\")|className\\w*?=\\w*?\\{([\\s\\S]+?)\\}",
+      "\"(.+?)\""
+    ]
+  }
 }
 export default config
