@@ -19,7 +19,7 @@ export default function Game() {
 
   return (
     <div className="flex w-full min-h-full justify-center gap-1 overflow-hidden md:py-3 bg-slate-200">
-      <div className="w-[650px] min-h-full gap-1 flex-col hidden md:flex">
+      <div className="w-[650px] min-h-full gap-5 flex-col hidden md:flex">
         <HeroPanel isEnemy={true} />
         <HeroPanel isEnemy={false}/>
       </div>
@@ -74,7 +74,7 @@ export default function Game() {
       <div className="min-h-full shrink-0 flex-col gap-1 w-[250px] hidden lg:flex">
         <CardRowPool noPadding={true}>
           <Card isReversed={true} />
-          <Card isReversed={true} />
+          <Card isReversed={true} count={10} />
         </CardRowPool>
         <div className="h-full"></div>
         <div className="h-full"></div>
@@ -83,7 +83,7 @@ export default function Game() {
         <div className="h-full"></div>
         <CardRowPool>
           <Card isReversed={true} />
-          <Card isReversed={true} />
+          <Card isReversed={true} count={13} />
         </CardRowPool>
       </div>
     </div>

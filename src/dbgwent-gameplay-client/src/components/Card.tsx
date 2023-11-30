@@ -1,10 +1,18 @@
 "use client";
 
-import { LegacyRef, MutableRefObject, useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  LegacyRef,
+  MutableRefObject,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 
 type CardProps = {
   isReversed?: boolean;
-  onClickChanged?: (value: boolean) => void
+  onClickChanged?: (value: boolean) => void;
+  count?: number
 };
 
 export default function Card(props: CardProps) {
@@ -22,7 +30,7 @@ export default function Card(props: CardProps) {
     >
       <div
         className={`${
-          !props.isReversed && 'duration-100 opacity-80 hover:opacity-100' //hover:md:scale-[120%]
+          !props.isReversed && "duration-100 opacity-80 hover:opacity-100" //hover:md:scale-[120%]
         } h-full w-full bg-slate-600 rounded-lg`}
       >
         {!props.isReversed && (
@@ -32,6 +40,19 @@ export default function Card(props: CardProps) {
           >
             <span
               className="absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 text-sm/[12px] font-bold select-none"
+              style={{ fontSize: "1.5cqh" }}
+            >
+              {Math.floor(Math.random() * 10 + 1)}
+            </span>
+          </div>
+        )}
+        {props.isReversed && props.count && (
+          <div
+            className="absolute w-[30%] bg-slate-800 left-[50%] bottom-0 -translate-x-1/2"
+            style={{ aspectRatio: 1 / 1 }}
+          >
+            <span
+              className="absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 text-sm/[12px] font-bold select-none text-white"
               style={{ fontSize: "1.5cqh" }}
             >
               {Math.floor(Math.random() * 10 + 1)}
