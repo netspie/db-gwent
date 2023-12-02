@@ -1,5 +1,6 @@
 "use client";
 
+import { useCardSelectionState } from "@/state/CardSelectedState";
 import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 
@@ -20,7 +21,8 @@ export default function Card(props: CardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [reversed, setReversed] = useState(false);
   const [posStyle, setPosStyle] = useState("relative");
-  const [isSelected, setSelected] = useState(false)
+  const [isSelectedLocal, setSelectedLocal]  = useState()
+  const { isSelected, setSelected } = useCardSelectionState()
 
   const imagePath = `/images/${
     imagePaths[Math.floor(Math.random() * imagePaths.length)]
@@ -36,6 +38,8 @@ export default function Card(props: CardProps) {
   };
 
   const onClick = () => {
+    setSelectedLocal(isSelectedLocal)
+    setSelected(!isSelected)
   };
 
   return (
@@ -44,7 +48,7 @@ export default function Card(props: CardProps) {
       ref={ref}
       className={`${posStyle} min-h-full ${
         !props.isReversed && "cursor-pointer"
-      } ${false ? "absolute transform -translate-y-20 translate-x-20 transition duration-300 " : "transform translate-y-0 translate-x-0 transition duration-300"}`}
+      } ${isSelected ? "absolute transform -translate-y-20 translate-x-20 transition duration-300" : "transform translate-y-0 translate-x-0 transition duration-300"}`}
       style={{ aspectRatio: 1 / 1.5 }}
     >
       <div
@@ -59,7 +63,7 @@ export default function Card(props: CardProps) {
             alt="Dope"
             layout="fill"
             objectFit="cover"
-            className={`${isSelected ? 'z-99999' : ''}`}
+            className={`${isSelectedLocal ? 'z-99999' : ''}`}
           />
         )}
 

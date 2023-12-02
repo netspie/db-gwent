@@ -1,5 +1,6 @@
 "use client";
 
+import { useCardSelectionState } from "@/state/CardSelectedState";
 import { useRef, useState, useEffect } from "react";
 
 type CardRowProps = {
@@ -10,11 +11,14 @@ type CardRowProps = {
 export default function CardRow(props: CardRowProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [cardSelected, setCardSelected] = useState(false);
-  const [isSelected, setSelected] = useState(false)
+  const selectionRef = useRef(useCardSelectionState.getState().isSelected)
+  const { isSelected } = useCardSelectionState()
 
   useEffect(() => {
-    console.log('DOPE DAAMN DUCK')
-  }, [isSelected])
+    useCardSelectionState.subscribe(
+      state => (selectionRef.current = state.isSelected)
+    )
+  }, [])
 
   return (
     <div

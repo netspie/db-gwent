@@ -1,11 +1,14 @@
 "use client";
 
-import Card from "@/components/Card";
-import CardRow from "@/components/CardRow";
+import CardEx from "@/components/Card" ;
+import CardRowEx from "@/components/CardRow";
 import CardRowBottom from "@/components/CardRowBottom";
 import CardRowPool from "@/components/CardRowPool";
 import HeroPanel from "@/components/HeroPanel";
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
+
+const Card = memo(CardEx)
+const CardRow = memo(CardRowEx)
 
 export default function Game() {
   const [hydrated, setHydrated] = useState(false);
