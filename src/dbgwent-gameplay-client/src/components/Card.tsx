@@ -1,7 +1,5 @@
 "use client";
 
-import { useAppContext } from "@/context";
-import { useSelected } from "@/hooks/useSelected";
 import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 
@@ -20,10 +18,9 @@ const imagePaths: String[] = [
 
 export default function Card(props: CardProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const appContext = useAppContext()
   const [reversed, setReversed] = useState(false);
   const [posStyle, setPosStyle] = useState("relative");
-  const [isSelected, setSelected] = useSelected(false);
+  const [isSelected, setSelected] = useState(false)
 
   const imagePath = `/images/${
     imagePaths[Math.floor(Math.random() * imagePaths.length)]
@@ -39,9 +36,6 @@ export default function Card(props: CardProps) {
   };
 
   const onClick = () => {
-    props.onSelectedChanged && props.onSelectedChanged(!isSelected)
-    appContext.isCardSelected = !isSelected
-    setSelected(!isSelected);
   };
 
   return (
@@ -50,7 +44,7 @@ export default function Card(props: CardProps) {
       ref={ref}
       className={`${posStyle} min-h-full ${
         !props.isReversed && "cursor-pointer"
-      } ${isSelected ? "absolute transform -translate-y-20 translate-x-20 transition duration-300 " : "transform translate-y-0 translate-x-0 transition duration-300"}`}
+      } ${false ? "absolute transform -translate-y-20 translate-x-20 transition duration-300 " : "transform translate-y-0 translate-x-0 transition duration-300"}`}
       style={{ aspectRatio: 1 / 1.5 }}
     >
       <div

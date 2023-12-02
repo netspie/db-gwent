@@ -1,6 +1,5 @@
 "use client";
 
-import { useSelected } from "@/hooks/useSelected";
 import { useRef, useState, useEffect } from "react";
 
 type CardRowProps = {
@@ -11,7 +10,7 @@ type CardRowProps = {
 export default function CardRow(props: CardRowProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [cardSelected, setCardSelected] = useState(false);
-  const [isSelected, setSelected] = useSelected(false)
+  const [isSelected, setSelected] = useState(false)
 
   useEffect(() => {
     console.log('DOPE DAAMN DUCK')
