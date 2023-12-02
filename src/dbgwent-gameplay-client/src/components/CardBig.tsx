@@ -32,6 +32,8 @@ export default function CardBig(props: CardBigProps) {
           alt="Description"
           layout="fill"
           objectFit="cover"
+          sizes=''
+          priority={true}
         />
       <div className="h-full w-full bg-slate-600 bg-opacity-50 alpha">
         <div

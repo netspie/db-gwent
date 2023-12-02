@@ -3,14 +3,14 @@
 import { createContext, useContext, useState } from 'react'
 
 const AppContext = createContext({
-    hello: 'world'
+    isCardSelected: false,
 })
 
 export function AppWrapper({ children } : {
   children: React.ReactNode
 }) {
   let [state, setState] = useState({
-    hello: 'world'
+    isCardSelected: false
   })
 
   return (

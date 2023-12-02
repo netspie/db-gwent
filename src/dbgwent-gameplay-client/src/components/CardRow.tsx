@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useSelected } from "@/hooks/useSelected";
+import { useRef, useState, useEffect } from "react";
 
 type CardRowProps = {
   children?: React.ReactNode;
@@ -9,7 +10,12 @@ type CardRowProps = {
 
 export default function CardRow(props: CardRowProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [clicked, setClicked] = useState(false);
+  const [cardSelected, setCardSelected] = useState(false);
+  const [isSelected, setSelected] = useSelected(false)
+
+  useEffect(() => {
+    console.log('DOPE DAAMN DUCK')
+  }, [isSelected])
 
   return (
     <div
@@ -18,13 +24,14 @@ export default function CardRow(props: CardRowProps) {
     >
       {/* <div className="bg-gray-500 min-w-[80px] h-full hidden md:flex" style={{ aspectRatio: 1 / 1.5 }} ></div> */}
       <div
-        className={`absolute row-parent flex gap-1 w-full h-full before:m-auto after:m-auto overflow-x-auto overflow-y-clip `}
+        className={`absolute row-parent flex gap-1 w-full h-full before:m-auto after:m-auto 
+        ${!isSelected ? 'overflow-x-auto overflow-y-clip' : ''}`}
         style={{ overflowClipMargin: "100px" }}
       >
         {props.children}
       </div>
       <div
-        className="absolute min-h-[20%] bg-slate-300 left-0 top-full -translate-y-full md:-translate-x-1/2 md:top-1/2 md:-translate-y-1/2 flex items-center justify-center z-10000"
+        className="absolute min-h-[20%] bg-slate-300 left-0 top-full -translate-y-full md:-translate-x-1/2 md:top-1/2 md:-translate-y-1/2 flex items-center justify-center"
         style={{ aspectRatio: 1 / 1 }}
       >
         <span

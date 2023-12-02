@@ -1,11 +1,13 @@
 "use client";
 
+import { useAppContext } from "@/context";
+import { useSelected } from "@/hooks/useSelected";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 type CardProps = {
   isReversed?: boolean;
-  onClickChanged?: (value: boolean) => void;
+  onSelectedChanged?: (value: boolean) => void;
   count?: number;
 };
 
@@ -18,26 +20,44 @@ const imagePaths: String[] = [
 
 export default function Card(props: CardProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const appContext = useAppContext()
   const [reversed, setReversed] = useState(false);
+  const [posStyle, setPosStyle] = useState("relative");
+  const [isSelected, setSelected] = useSelected(false);
 
   const imagePath = `/images/${
     imagePaths[Math.floor(Math.random() * imagePaths.length)]
   }`; //GetRandomFilePath('/images')
+  
+  const startPositioning = () => {
+    //setPosStyle('fixed')
+    console.log("dope");
+  };
+
+  const endPositioning = () => {
+    //setPosStyle('relative z-999999')
+  };
+
+  const onClick = () => {
+    props.onSelectedChanged && props.onSelectedChanged(!isSelected)
+    appContext.isCardSelected = !isSelected
+    setSelected(!isSelected);
+  };
 
   return (
     <div
-      onMouseUp={() => props.onClickChanged && props?.onClickChanged(false)}
-      onMouseDown={() => props.onClickChanged && props?.onClickChanged(true)}
-      onMouseOut={() => props.onClickChanged && props?.onClickChanged(false)}
+      onClick={onClick}
       ref={ref}
-      className={`relative min-h-full ${!props.isReversed && "cursor-pointer"}`}
+      className={`${posStyle} min-h-full ${
+        !props.isReversed && "cursor-pointer"
+      } ${isSelected ? "absolute transform -translate-y-20 translate-x-20 transition duration-300 " : "transform translate-y-0 translate-x-0 transition duration-300"}`}
       style={{ aspectRatio: 1 / 1.5 }}
     >
       <div
         className={`${
           !props.isReversed &&
-          "relative duration-100 opacity-100 hover:opacity-80" //hover:md:scale-[120%]
-        } h-full w-full bg-slate-600 rounded-lg overflow-clip`}
+          "relative hover:brightness-90"
+        } h-full w-full bg-slate-600 rounded-lg overflow-clip select-none`}
       >
         {!props.isReversed && (
           <Image
@@ -45,12 +65,13 @@ export default function Card(props: CardProps) {
             alt="Dope"
             layout="fill"
             objectFit="cover"
+            className={`${isSelected ? 'z-99999' : ''}`}
           />
         )}
 
         {!props.isReversed && (
           <div
-            className="relative max-w-[30%] bg-slate-200 z-100"
+            className="relative max-w-[30%] bg-slate-200  transition-transform duration-1000"
             style={{ aspectRatio: 1 / 1 }}
           >
             <span
