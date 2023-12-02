@@ -1,23 +1,28 @@
 "use client";
 
-import {
-  LegacyRef,
-  MutableRefObject,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import Image from "next/image";
+import { useRef, useState } from "react";
 
 type CardProps = {
   isReversed?: boolean;
   onClickChanged?: (value: boolean) => void;
-  count?: number
+  count?: number;
 };
+
+const imagePaths: String[] = [
+  "bardock-ki-blast-1.jpg",
+  "goku-genki-dama-1.jpg",
+  "goku-kamehame-1.jpg",
+  "vegeta-final-flash-1.jpg",
+];
 
 export default function Card(props: CardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [reversed, setReversed] = useState(false);
+
+  const imagePath = `/images/${
+    imagePaths[Math.floor(Math.random() * imagePaths.length)]
+  }`; //GetRandomFilePath('/images')
 
   return (
     <div
@@ -30,12 +35,22 @@ export default function Card(props: CardProps) {
     >
       <div
         className={`${
-          !props.isReversed && "duration-100 opacity-80 hover:opacity-100" //hover:md:scale-[120%]
-        } h-full w-full bg-slate-600 rounded-lg`}
+          !props.isReversed &&
+          "relative duration-100 opacity-100 hover:opacity-80" //hover:md:scale-[120%]
+        } h-full w-full bg-slate-600 rounded-lg overflow-clip`}
       >
         {!props.isReversed && (
+          <Image
+            src={`${imagePath}`}
+            alt="Dope"
+            layout="fill"
+            objectFit="cover"
+          />
+        )}
+
+        {!props.isReversed && (
           <div
-            className="relative max-w-[30%] bg-slate-200"
+            className="relative max-w-[30%] bg-slate-200 z-100"
             style={{ aspectRatio: 1 / 1 }}
           >
             <span
