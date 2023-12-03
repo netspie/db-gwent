@@ -34,16 +34,10 @@ const path = [
   { x: 100, y: -200 },
 ];
 
-const transforms: Transform[] = [
-  { position: { x: -100, y: -200 } },
-  { scale: 3 },
-  { rotation: 90 },
-  { scale: 1 },
-];
-
 type TransformerProps = {
   children: React.ReactNode;
   childrenRef: React.RefObject<HTMLElement>;
+  transformations: Transform[];
 };
 
 function Transformer(props: TransformerProps) {
@@ -65,23 +59,23 @@ function Transformer(props: TransformerProps) {
     setOffsetY(props.childrenRef.current.offsetTop);
 
     let newIndex = index;
-    if (index === transforms.length - 1) newIndex = -1;
+    if (index === props.transformations.length - 1) newIndex = -1;
     else newIndex++;
 
     setIndex(newIndex);
     if (newIndex >= 0) {
-      const transform = transforms[newIndex];
+      const transform = props.transformations[newIndex];
       console.log("index " + newIndex);
 
       setStyleClass(
         `absolute transform translate-x-0 translate-y-0 scale-100 rotate-0 transition duration-300`
       );
 
-      const lastPosition = transforms.find(
+      const lastPosition = props.transformations.find(
         (t, i) => t.position && i <= newIndex
       );
-      const lastScale = transforms.find((t, i) => t.scale && i <= newIndex);
-      const lastRotation = transforms.find(
+      const lastScale = props.transformations.find((t, i) => t.scale && i <= newIndex);
+      const lastRotation = props.transformations.find(
         (t, i) => t.rotation && i <= newIndex
       );
 
@@ -186,7 +180,15 @@ function NestedComponent() {
   const transformRef = useRef(null);
 
   return (
-    <Transformer childrenRef={boxRef}>
+    <Transformer
+      childrenRef={boxRef}
+      transformations={[
+        { position: { x: -100, y: -200 } },
+        { scale: 3 },
+        { rotation: 90 },
+        { scale: 1 },
+      ]}
+    >
       <div
         ref={boxRef}
         className={`w-[40px] h-[60px] bg-red-700 cursor-pointer hover:bg-red-800 active:bg-red-900`}
