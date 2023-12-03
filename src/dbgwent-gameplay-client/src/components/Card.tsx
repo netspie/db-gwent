@@ -33,7 +33,7 @@ export default function Card(props: CardProps) {
         !props.isReversed && "cursor-pointer"
       } ${
         isSelected && selectedCardId === props.id
-          ? "absolute transform -translate-y-20 translate-x-20 transition duration-300"
+          ? "absolute transform -translate-y-20 translate-x-20 transition duration-300 z-99999"
           : "transform translate-y-0 translate-x-0 transition duration-300"
       }`}
       style={{ aspectRatio: 1 / 1.5 }}
