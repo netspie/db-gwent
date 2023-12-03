@@ -5,41 +5,24 @@ import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 
 type CardProps = {
+  id: number;
+  imagePath?: string
   isReversed?: boolean;
   onSelectedChanged?: (value: boolean) => void;
   count?: number;
 };
 
-const imagePaths: String[] = [
-  "bardock-ki-blast-1.jpg",
-  "goku-genki-dama-1.jpg",
-  "goku-kamehame-1.jpg",
-  "vegeta-final-flash-1.jpg",
-];
-
 export default function Card(props: CardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [reversed, setReversed] = useState(false);
   const [posStyle, setPosStyle] = useState("relative");
-  const [isSelectedLocal, setSelectedLocal]  = useState()
-  const { isSelected, setSelected } = useCardSelectionState()
-
-  const imagePath = `/images/${
-    imagePaths[Math.floor(Math.random() * imagePaths.length)]
-  }`; //GetRandomFilePath('/images')
-  
-  const startPositioning = () => {
-    //setPosStyle('fixed')
-    console.log("dope");
-  };
-
-  const endPositioning = () => {
-    //setPosStyle('relative z-999999')
-  };
+  const [isSelectedLocal, setSelectedLocal] = useState();
+  const { isSelected, selectedCardId, setSelected } = useCardSelectionState();
 
   const onClick = () => {
-    setSelectedLocal(isSelectedLocal)
-    setSelected(!isSelected)
+    setSelectedLocal(isSelectedLocal);
+    setSelected(!isSelected, props.id);
+    console.log('move ' + props.id)
   };
 
   return (
@@ -48,22 +31,25 @@ export default function Card(props: CardProps) {
       ref={ref}
       className={`${posStyle} min-h-full ${
         !props.isReversed && "cursor-pointer"
-      } ${isSelected ? "absolute transform -translate-y-20 translate-x-20 transition duration-300" : "transform translate-y-0 translate-x-0 transition duration-300"}`}
+      } ${
+        isSelected && selectedCardId === props.id
+          ? "absolute transform -translate-y-20 translate-x-20 transition duration-300"
+          : "transform translate-y-0 translate-x-0 transition duration-300"
+      }`}
       style={{ aspectRatio: 1 / 1.5 }}
     >
       <div
         className={`${
-          !props.isReversed &&
-          "relative hover:brightness-90"
+          !props.isReversed && "relative hover:brightness-90"
         } h-full w-full bg-slate-600 rounded-lg overflow-clip select-none`}
       >
-        {!props.isReversed && (
+        {!props.isReversed && props.imagePath && (
           <Image
-            src={`${imagePath}`}
+            src={`${props.imagePath}`}
             alt="Dope"
             layout="fill"
             objectFit="cover"
-            className={`${isSelectedLocal ? 'z-99999' : ''}`}
+            className={`${isSelectedLocal ? "z-99999" : ""}`}
           />
         )}
 

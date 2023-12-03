@@ -2,10 +2,12 @@ import { create } from "zustand";
 
 type CardSelectedState = {
   isSelected: boolean
-  setSelected: (isSelected: boolean) => void
+  selectedCardId: number | undefined
+  setSelected: (isSelected: boolean, selectedCardId: number) => void
 }
 
 export const useCardSelectionState = create<CardSelectedState>()((set) => ({
   isSelected: false,
-  setSelected: (isSelected: boolean) => set({ isSelected })
+  selectedCardId: undefined,
+  setSelected: (isSelected: boolean, selectedCardId: number) => set({ isSelected, selectedCardId })
 }))
