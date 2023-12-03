@@ -8,7 +8,9 @@ export default function Test() {
     <div className="min-h-screen flex items-center justify-center bg-slate-900">
       <div className="relative">
         <div className="w-[200px] h-[200px] bg-slate-500 overflow-clip flex gap-3 justify-center items-center ">
-          {Square()}
+          {NestedComponent()}
+          {NestedComponent()}
+          {NestedComponent()}
         </div>
       </div>
     </div>
@@ -39,20 +41,28 @@ const transforms: Transform[] = [
   { scale: 1 },
 ];
 
-function Square() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [offset, setOffset] = useState(0);
+type TransformerProps = {
+  children: React.ReactNode;
+  childrenRef: React.RefObject<HTMLElement>;
+};
+
+function Transformer(props: TransformerProps) {
+  const [offsetX, setOffsetX] = useState(0);
+  const [offsetY, setOffsetY] = useState(0);
+  const [styleClassInitial, setStyleClassInitial] = useState("");
   const [styleClass, setStyleClass] = useState("");
   const [index, setIndex] = useState(-1);
   const [style, setStyle] = useState<React.CSSProperties>();
+  const [fillerStyle, setFillerStyle] = useState<React.CSSProperties>();
 
   const select = () => {
-    if (!ref.current) {
+    if (!props.childrenRef.current) {
       console.log("ref not init");
       return;
     }
 
-    setOffset(ref.current.offsetLeft);
+    setOffsetX(props.childrenRef.current.offsetLeft);
+    setOffsetY(props.childrenRef.current.offsetTop);
 
     let newIndex = index;
     if (index === transforms.length - 1) newIndex = -1;
@@ -136,23 +146,51 @@ function Square() {
     }
   };
 
-  useEffect(() => {
-    if (!ref.current) return;
+  useLayoutEffect(() => {
+    if (!props.childrenRef.current || !style) return;
 
-    ref.current.style.left = `${offset}px`;
+    let initialClassName = styleClassInitial;
+    if (styleClassInitial.length == 0) {
+      initialClassName = props.childrenRef.current.className;
+      setStyleClassInitial(initialClassName);
+
+      const rect = props.childrenRef.current.getBoundingClientRect();
+      setFillerStyle({
+        width: rect.width,
+        height: rect.height,
+      });
+    }
+
+    console.log(initialClassName);
+    props.childrenRef.current.style.left = `${offsetX}px`;
+    props.childrenRef.current.style.top = `${offsetY}px`;
+    props.childrenRef.current.className = initialClassName + " " + styleClass;
+
+    Object.keys(style).forEach((key) => {
+      if (!props.childrenRef.current || !style || !key) return;
+      const attribute = (style as any)[key];
+      props.childrenRef.current.style.setProperty(key, attribute);
+    });
   }, [index]);
-  
-  style && console.log(style);
 
   return (
-    <>
-      {index >= 0 && <div className="w-[40px] h-[60px]"></div>}
+    <div style={fillerStyle} onClick={select} className="h-fit w-fit">
+      {index >= 0 && <div style={fillerStyle}></div>}
+      {props.children}
+    </div>
+  );
+}
+
+function NestedComponent() {
+  const boxRef = useRef<HTMLDivElement>(null);
+  const transformRef = useRef(null);
+
+  return (
+    <Transformer childrenRef={boxRef}>
       <div
-        ref={ref}
-        className={`${styleClass} w-[40px] h-[60px] bg-red-700 cursor-pointer hover:bg-red-800 active:bg-red-900`}
-        onClick={select}
-        style={style}
+        ref={boxRef}
+        className={`w-[40px] h-[60px] bg-red-700 cursor-pointer hover:bg-red-800 active:bg-red-900`}
       ></div>
-    </>
+    </Transformer>
   );
 }
