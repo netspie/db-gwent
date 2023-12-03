@@ -12,6 +12,13 @@ const imagePaths: string[] = [
   "goku-genki-dama-1.jpg",
   "goku-kamehame-1.jpg",
   "vegeta-final-flash-1.jpg",
+  "krillin-disc-1.jpg",
+  "gohan-kame-1.png",
+  "picollo-strike.jpg",
+  "trunks-rage-1.jpg",
+  "yamucha-wolf-1.jpg",
+  "18-ball-1.jpg",
+  "brolly-strike.png"
 ];
 
 const getRandomImagePath = () => {
