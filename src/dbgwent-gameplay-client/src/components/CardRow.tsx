@@ -1,6 +1,5 @@
 "use client";
 
-import { useCardSelectionState } from "@/state/CardSelectedState";
 import { useRef, useState, useEffect } from "react";
 
 type CardRowProps = {
@@ -11,14 +10,6 @@ type CardRowProps = {
 export default function CardRow(props: CardRowProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [cardSelected, setCardSelected] = useState(false);
-  const selectionRef = useRef(useCardSelectionState.getState().isSelected)
-  const { isSelected } = useCardSelectionState()
-
-  useEffect(() => {
-    useCardSelectionState.subscribe(
-      state => (selectionRef.current = state.isSelected)
-    )
-  }, [])
 
   return (
     <div
@@ -27,8 +18,7 @@ export default function CardRow(props: CardRowProps) {
     >
       {/* <div className="bg-gray-500 min-w-[80px] h-full hidden md:flex" style={{ aspectRatio: 1 / 1.5 }} ></div> */}
       <div
-        className={`absolute row-parent flex gap-1 w-full h-full before:m-auto after:m-auto 
-        ${!isSelected ? 'overflow-x-auto overflow-y-clip' : ''}`}
+        className='absolute row-parent flex gap-1 w-full h-full before:m-auto after:m-auto overflow-x-auto overflow-y-clip' 
         style={{ overflowClipMargin: "100px" }}
       >
         {props.children}

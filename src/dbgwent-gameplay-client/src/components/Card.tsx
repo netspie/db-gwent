@@ -1,45 +1,86 @@
 "use client";
 
-import { useCardSelectionState } from "@/state/CardSelectedState";
 import Image from "next/image";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, RefObject } from "react";
 
 type CardProps = {
   id: number;
-  imagePath?: string
+  imagePath?: string;
   isReversed?: boolean;
   onSelectedChanged?: (value: boolean) => void;
   count?: number;
 };
 
 export default function Card(props: CardProps) {
-  const ref = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const [reversed, setReversed] = useState(false);
-  const [posStyle, setPosStyle] = useState("relative");
-  const [isSelectedLocal, setSelectedLocal] = useState();
-  const { isSelected, selectedCardId, setSelected } = useCardSelectionState();
+  const [isSelected, setSelected] = useState(false);
+  const [refresh, setRefresh] = useState(false);
 
   const onClick = () => {
-    setSelectedLocal(isSelectedLocal);
-    setSelected(!isSelected, props.id);
-    console.log('move ' + props.id)
+    setSelected(!isSelected);
+    makeInteractable(cardRef);
   };
+
+  const makeInteractable = (oldRef: RefObject<HTMLElement>) => {
+    if (!oldRef.current) return;
+
+    const ref = oldRef.current.cloneNode(true) as HTMLElement;
+
+    const rect = oldRef.current.getBoundingClientRect();
+    console.log("before");
+    console.log(rect);
+    ref.className = "";
+    ref.style.position = "fixed";
+    ref.style.top = rect.top + "px";
+    ref.style.left = rect.left + "px";
+
+    ref.style.minWidth = rect.width + "px";
+    ref.style.width = rect.width + "px";
+    ref.style.maxWidth = rect.width + "px";
+
+    ref.style.minHeight = rect.height + "px";
+    ref.style.height = rect.height + "px";
+    ref.style.maxHeight = rect.height + "px";
+
+    ref.style.zIndex = "99999";
+    console.log("after");
+    console.log(ref.getBoundingClientRect());
+
+    setTimeout(() => {
+
+      const scale = 3
+      const xDelta = -(rect.left /2 - (rect.width * scale / 2) + rect.width / 2) //window.innerWidth 
+      const yDelta = -(rect.top / 1.2- (rect.height * scale / 2) + rect.height / 2) //window.innerWidth 
+
+      ref.style.transitionDuration = "300ms";
+      ref.style.transform = `translate(${xDelta}px, ${yDelta}px) scale(${scale})`;
+    }, 0);
+
+    ref.addEventListener("click", () => {
+      ref.style.transitionDuration = "300ms";
+      ref.style.transform = "translate(0, 0) scale(1)";
+      setTimeout(() => {
+        if (oldRef.current) oldRef.current.style.opacity = "1";
+        ref.remove();
+      }, 300);
+    });
+
+    oldRef.current.style.opacity = "0";
+    document.body.append(ref);
+  };
+
+  useEffect(() => {}, [refresh]);
 
   return (
     <div
       onClick={onClick}
-      ref={ref}
-      className={`${posStyle} min-h-full ${
-        !props.isReversed && "cursor-pointer"
-      } ${
-        isSelected && selectedCardId === props.id
-          ? "absolute transform -translate-y-20 translate-x-20 transition duration-300 z-99999"
-          : "transform translate-y-0 translate-x-0 transition duration-300"
-      }`}
+      ref={cardRef}
+      className={`card min-h-full ${!props.isReversed && "cursor-pointer"} `}
       style={{ aspectRatio: 1 / 1.5 }}
     >
       <div
-        className={`${
+        className={`relative ${
           !props.isReversed && "relative hover:brightness-90"
         } h-full w-full bg-slate-600 rounded-lg overflow-clip select-none`}
       >
@@ -49,7 +90,6 @@ export default function Card(props: CardProps) {
             alt="Dope"
             layout="fill"
             objectFit="cover"
-            className={`${isSelectedLocal ? "z-99999" : ""}`}
           />
         )}
 

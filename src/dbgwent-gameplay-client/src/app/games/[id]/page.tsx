@@ -42,7 +42,7 @@ export default function Game() {
         <HeroPanel isEnemy={true} />
         <HeroPanel isEnemy={false} />
       </div>
-      <div className="row-group flex flex-col grow-0 items-center justify-center gap-1 w-full overflow-clip">
+      <div className="row-group flex flex-col grow-0 items-center justify-center gap-1 w-full">
         <CardRow>
           <Card id={1} imagePath={getRandomImagePath()} />
           <Card id={2} imagePath={getRandomImagePath()} />
