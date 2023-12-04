@@ -1,24 +1,41 @@
 "use client";
 
+import { useCardRowIndicatedState } from "@/state/CardRowIndicatedState";
+import { useCardSelectionState } from "@/state/CardSelectedState";
 import { useRef, useState, useEffect } from "react";
 
 type CardRowProps = {
   children?: React.ReactNode;
-  onChildClickChanged?: (value: boolean) => void
+  index: number,
+  onChildClickChanged?: (value: boolean) => void;
 };
 
 export default function CardRow(props: CardRowProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [cardSelected, setCardSelected] = useState(false);
+  const { isSelected, setSelected, selectedCardId } = useCardSelectionState();
+  const { hasIndicatedRow, setIndicatedRow } = useCardRowIndicatedState();
 
   return (
     <div
       ref={ref}
-      className="relative flex w-full h-full "
+      className={`relative flex w-full h-full ${
+        isSelected && "bg-yellow-100 hover:bg-yellow-200 cursor-pointer"
+      }`}
+      onClick={() => {
+        if (!isSelected || !ref.current || !selectedCardId) return;
+        const rect = ref.current.getBoundingClientRect();
+        setIndicatedRow(
+          true,
+          selectedCardId,
+          rect.left + rect.width / 2,
+          rect.top,
+          props.index
+        );
+      }}
     >
       {/* <div className="bg-gray-500 min-w-[80px] h-full hidden md:flex" style={{ aspectRatio: 1 / 1.5 }} ></div> */}
       <div
-        className='absolute row-parent flex gap-1 w-full h-full before:m-auto after:m-auto overflow-x-auto overflow-y-clip' 
+        className="absolute row-parent flex gap-1 w-full h-full before:m-auto after:m-auto overflow-x-auto overflow-y-clip"
         style={{ overflowClipMargin: "100px" }}
       >
         {props.children}
@@ -31,7 +48,8 @@ export default function CardRow(props: CardRowProps) {
           className="text-sm/[12px] font-bold"
           style={{ fontSize: "1.5cqh" }}
         >
-          {Math.floor(Math.random() * 10 + 1)}
+          14
+          {/* {Math.floor(Math.random() * 10 + 1)} */}
         </span>
       </div>
     </div>

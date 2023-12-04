@@ -1,6 +1,5 @@
 "use client";
 
-import { GetRandomFilePath } from "@/utilities/FileUtilities";
 import Image from "next/image";
 import { useRef, useState } from "react";
 

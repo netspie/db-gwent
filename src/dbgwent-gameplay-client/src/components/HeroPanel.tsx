@@ -56,7 +56,8 @@ export default function HeroPanel(props: HeroPanelProps) {
               className="absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 text-sm/[12px] font-bold select-none text-white"
               style={{ fontSize: "1.5cqh" }}
             >
-              {Math.floor(Math.random() * 10 + 1)}
+              {/* {Math.floor(Math.random() * 10 + 1)} */}
+              9
             </span>
         </div>
       </div>
