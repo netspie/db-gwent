@@ -48,23 +48,36 @@ export default function Card(props: CardProps) {
     console.log(ref.getBoundingClientRect());
 
     setTimeout(() => {
+      let scale = 6;
 
-      const scale = 3
-      const xDelta = -(rect.left /2 - (rect.width * scale / 2) + rect.width / 2) //window.innerWidth 
-      const yDelta = -(rect.top / 1.2- (rect.height * scale / 2) + rect.height / 2) //window.innerWidth 
+      scale =
+        Math.min(
+          window.innerWidth / rect.width,
+          window.innerHeight / rect.height
+        ) * 0.9;
+
+      const x = window.innerWidth / 2 - (rect.width / 2) * scale;
+      const y = window.innerHeight / 2 - (rect.height / 2) * scale;
+
+      let xDelta = x - (rect.left - (rect.width / 2) * (scale - 1));
+      let yDelta = y - (rect.top - (rect.height / 2) * (scale - 1));
 
       ref.style.transitionDuration = "300ms";
       ref.style.transform = `translate(${xDelta}px, ${yDelta}px) scale(${scale})`;
     }, 0);
 
-    ref.addEventListener("click", () => {
+    const perform = () => {
       ref.style.transitionDuration = "300ms";
       ref.style.transform = "translate(0, 0) scale(1)";
       setTimeout(() => {
         if (oldRef.current) oldRef.current.style.opacity = "1";
         ref.remove();
       }, 300);
-    });
+    };
+
+    window.addEventListener("click", () => perform());
+    window.addEventListener("keypress", (() => { perform() }));
+    ref.addEventListener("keypress", () => { perform() });
 
     oldRef.current.style.opacity = "0";
     document.body.append(ref);
@@ -74,9 +87,11 @@ export default function Card(props: CardProps) {
 
   return (
     <div
-      onClick={onClick}
+      onDoubleClick={onClick}
       ref={cardRef}
-      className={`card min-h-full ${!props.isReversed && "cursor-pointer"} `}
+      className={`card min-h-full ${
+        (!props.isReversed || isSelected) && "cursor-pointer"
+      } `}
       style={{ aspectRatio: 1 / 1.5 }}
     >
       <div
