@@ -163,6 +163,7 @@ export default function Card(props: CardProps) {
             alt="Dope"
             layout="fill"
             objectFit="cover"
+            quality={2}
           />
         )}
 

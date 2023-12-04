@@ -12,6 +12,11 @@ const imagePaths: string[] = [
   "yamucha-wolf-1.jpg",
   "18-ball-1.jpg",
   "brolly-strike.png",
+  "17-shield-1.jpg",
+  "gotenks-kamikaze-1.png",
+  "bulma.jpg",
+  "ub-blast.png"
+  //"karin-1.webp",
 ];
 
 type CardRowVM = {
@@ -38,13 +43,7 @@ export const useGameState = create<GameState>()((set, get) => ({
     { cards: [{ id: 5, points: 3, imagePath: imagePaths[4] }] },
     { cards: [{ id: 6, points: 3, imagePath: imagePaths[5] }] },
     {
-      cards: [
-        { id: 7, points: 3, imagePath: imagePaths[6] },
-        { id: 71, points: 3, imagePath: imagePaths[7] },
-        { id: 72, points: 3, imagePath: imagePaths[8] },
-        { id: 73, points: 3, imagePath: imagePaths[9] },
-        { id: 74, points: 3, imagePath: imagePaths[10] },
-      ],
+      cards: imagePaths.slice(6, imagePaths.length).map((imagePath, i) => ({ id: i + 7, points: 3, imagePath })),
     },
   ],
   addCard: (cardId: number, targetRowIndex: number) => {
