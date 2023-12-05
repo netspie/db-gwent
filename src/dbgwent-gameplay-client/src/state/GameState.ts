@@ -1,23 +1,23 @@
+import { RowType } from "@/app/types/types";
 import { create } from "zustand";
 
-const imagePaths: string[] = [
-  "bardock-ki-blast-1.jpg",
-  "goku-genki-dama-1.jpg",
-  "goku-kamehame-1.jpg",
-  "vegeta-final-flash-1.jpg",
-  "krillin-disc-1.jpg",
-  "gohan-kame-1.png",
-  "picollo-strike.jpg",
-  "trunks-rage-1.jpg",
-  "yamucha-wolf-1.jpg",
-  "18-ball-1.jpg",
-  "brolly-strike.png",
-  "17-shield-1.jpg",
-  "gotenks-kamikaze-1.png",
-  "bulma.jpg",
-  "ub-blast.png"
-  //"karin-1.webp",
-];
+const cardsData: CardVM[] = [
+  { id: 0, points: 3, imagePath:"bardock-ki-blast-1.jpg", rowType: RowType.Distant },
+  { id: 1, points: 5, imagePath:"goku-genki-dama-1.jpg", rowType: RowType.Huge },
+  { id: 2, points: 1, imagePath:"goku-kamehame-1.jpg", rowType: RowType.Huge },
+  { id: 3, points: 5, imagePath:"vegeta-final-flash-1.jpg", rowType: RowType.Huge },
+  { id: 4, points: 4, imagePath:"krillin-disc-1.jpg", rowType: RowType.Distant },
+  { id: 5, points: 7, imagePath:"gohan-kame-1.png", rowType: RowType.Huge },
+  { id: 6, points: 5, imagePath:"picollo-strike.jpg", rowType: RowType.Melee },
+  { id: 7, points: 8, imagePath:"trunks-rage-1.jpg", rowType: RowType.Melee },
+  { id: 9, points: 7, imagePath:"yamucha-wolf-1.jpg", rowType: RowType.Melee },
+  { id: 10, points: 9, imagePath:"18-ball-1.jpg", rowType: RowType.Distant },
+  { id: 11, points: 3, imagePath:"brolly-strike.png", rowType: RowType.Melee },
+  { id: 12, points: 2, imagePath:"17-shield-1.jpg", rowType: RowType.Melee },
+  { id: 13, points: 3, imagePath:"gotenks-kamikaze-1.png", rowType: RowType.Distant },
+  { id: 14, points: 2, imagePath:"bulma.jpg", rowType: RowType.Melee },
+  { id: 15, points: 1, imagePath:"ub-blast.png", rowType: RowType.Distant },
+]
 
 type CardRowVM = {
   cards: CardVM[];
@@ -27,6 +27,7 @@ type CardVM = {
   id: number;
   points: number;
   imagePath: string;
+  rowType: RowType
 };
 
 type GameState = {
@@ -36,16 +37,15 @@ type GameState = {
 
 export const useGameState = create<GameState>()((set, get) => ({
   cardRows: [
-    { cards: [{ id: 1, points: 3, imagePath: imagePaths[0] }] },
-    { cards: [{ id: 2, points: 3, imagePath: imagePaths[1] }] },
-    { cards: [{ id: 3, points: 3, imagePath: imagePaths[2] }] },
-    { cards: [{ id: 4, points: 3, imagePath: imagePaths[3] }] },
-    { cards: [{ id: 5, points: 3, imagePath: imagePaths[4] }] },
-    { cards: [{ id: 6, points: 3, imagePath: imagePaths[5] }] },
-    {
-      cards: imagePaths.slice(6, imagePaths.length).map((imagePath, i) => ({ id: i + 7, points: 3, imagePath })),
-    },
+    { cards: [] },
+    { cards: [] },
+    { cards: [] },
+    { cards: [] },
+    { cards: [] },
+    { cards: [] },
+    { cards: cardsData },
   ],
+
   addCard: (cardId: number, targetRowIndex: number) => {
     const oldState = get();
     const state = { cardRows: oldState.cardRows, addCard: oldState.addCard };

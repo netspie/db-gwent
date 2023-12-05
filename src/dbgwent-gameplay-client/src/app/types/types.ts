@@ -1,5 +1,12 @@
-enum RowType {
-  
+export enum RowType {
+  Melee,
+  Distant,
+  Huge
+}
+
+export enum SideType {
+  Enemy,
+  Player,
 }
 
 export enum LocationType {

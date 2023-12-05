@@ -1,13 +1,14 @@
+import { CardProps } from "@/components/Card";
 import { create } from "zustand";
 
 type CardSelectedState = {
   isSelected: boolean
-  selectedCardId: number | undefined
-  setSelected: (isSelected: boolean, selectedCardId: number) => void
+  selectedCard: CardProps | undefined
+  setSelected: (isSelected: boolean, selectedCard: CardProps | undefined) => void
 }
 
 export const useCardSelectionState = create<CardSelectedState>()((set) => ({
   isSelected: false,
-  selectedCardId: undefined,
-  setSelected: (isSelected: boolean, selectedCardId: number) => set({ isSelected, selectedCardId })
+  selectedCard: undefined,
+  setSelected: (isSelected: boolean, selectedCard: CardProps | undefined) => set({ isSelected, selectedCard })
 }))

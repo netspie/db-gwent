@@ -1,15 +1,17 @@
 "use client";
 
-import { LocationType } from "@/app/types/types";
+import { LocationType, RowType } from "@/app/types/types";
 import { useCardRowIndicatedState } from "@/state/CardRowIndicatedState";
 import { useCardSelectionState } from "@/state/CardSelectedState";
 import { useGameState } from "@/state/GameState";
 import Image from "next/image";
 import { useRef, useState, useEffect, RefObject } from "react";
 
-type CardProps = {
+export type CardProps = {
   id: number;
+  points?: number;
   locationType?: LocationType;
+  rowType?: RowType;
   imagePath?: string;
   isReversed?: boolean;
   onSelectedChanged?: (value: boolean) => void;
@@ -45,7 +47,7 @@ export default function Card(props: CardProps) {
   };
 
   const stopRowSelection = () => {
-    setSelected(false, props.id);
+    setSelected(false, undefined);
     setSelectedLocal(false);
 
     if (cardRef.current) cardRef.current.style.filter = "";
@@ -58,7 +60,7 @@ export default function Card(props: CardProps) {
     cardRef.current.style.filter = "brightness(50%)";
 
     setSelectedLocal(true);
-    setSelected(true, props.id);
+    setSelected(true, props);
 
     window.addEventListener("keypress", stopRowSelection);
   };
@@ -101,7 +103,7 @@ export default function Card(props: CardProps) {
       ref.style.transitionDuration = "300ms";
       ref.style.transform = "translate(0, 0) scale(1)";
       setSelectedLocal(false);
-      setSelected(false, props.id);
+      setSelected(false, undefined);
       window.removeEventListener("click", perform);
       window.removeEventListener("keypress", perform);
       ref.removeEventListener("keypress", perform);
@@ -142,6 +144,18 @@ export default function Card(props: CardProps) {
     }, 300);
   }, [hasIndicatedRow]);
 
+  const getIconPath = () => {
+    console.log('points - ' + props.points)
+    switch (props.rowType) {
+      case RowType.Melee:
+        return "/icons/punch.png";
+      case RowType.Distant:
+        return "/icons/distant-attack.png";
+      case RowType.Huge:
+        return "/icons/huge-attack.png";
+    }
+  };
+
   return (
     <div
       onDoubleClick={onDoubleClick}
@@ -167,18 +181,45 @@ export default function Card(props: CardProps) {
           />
         )}
 
+        <div className="absolute h-full w-[45%] from-black bg-gradient-to-r opacity-70"></div>
+
         {!props.isReversed && (
-          <div
-            className="relative max-w-[30%] bg-slate-200  transition-transform duration-1000"
-            style={{ aspectRatio: 1 / 1 }}
-          >
-            <span
-              className="absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 text-sm/[12px] font-bold select-none"
-              style={{ fontSize: "1.5cqh" }}
+          <div className="absolute left-[4%] top-[3%] h-full w-full flex flex-col gap-1 ">
+            <div
+              className="points relative  rounded-full max-w-[20%]"
+              style={{ aspectRatio: 1 / 1 }}
             >
-              {/* {Math.floor(Math.random() * 10 + 1)} */}
-              3
-            </span>
+              <span
+                className="absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 text-sm/[12px] font-bold select-none text-white"
+                style={{ fontSize: "1.5cqh" }}
+              >
+                { props.points && props.points }
+              </span>
+            </div>
+            <div
+              className={`skill relative bg-black rounded-sm max-w-[20%] flex justify-center items-center bg-opacity-0`}
+              style={{ aspectRatio: 1 / 1 }}
+            >
+              <Image
+                src={`${getIconPath()}`}
+                alt="Dope"
+                layout="fill"
+                objectFit="cover"
+                quality={2}
+              />
+            </div>
+            <div
+              className={`skill relative bg-black rounded-sm max-w-[20%] flex justify-center items-center bg-opacity-0`}
+              style={{ aspectRatio: 1 / 1 }}
+            >
+              <Image
+                src={`${getIconPath()}`}
+                alt="Dope"
+                layout="fill"
+                objectFit="cover"
+                quality={2}
+              />
+            </div>
           </div>
         )}
         {props.isReversed && props.count && (
@@ -190,8 +231,7 @@ export default function Card(props: CardProps) {
               className="absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 text-sm/[12px] font-bold select-none text-white"
               style={{ fontSize: "1.5cqh" }}
             >
-              {/* {Math.floor(Math.random() * 10 + 1)} */}
-              8
+              {/* {Math.floor(Math.random() * 10 + 1)} */}8
             </span>
           </div>
         )}
