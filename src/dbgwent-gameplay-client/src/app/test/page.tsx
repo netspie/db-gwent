@@ -11,26 +11,32 @@ export default function Test() {
     x1: 100,
     y1: 200,
   });
-  const [bob, setBob] = useState(false);
-
-  //const canvasContext: CanvasRenderingContext2D
 
   const onMouseMove = (ev: MouseEvent) => {
+    drawLine(ev.clientX, ev.clientY)
+  };
+
+  const onTouchMove = (ev: TouchEvent) => {
+    const t = ev.changedTouches[0]
+    drawLine(t.clientX, t.clientY)
+  };
+
+  const drawLine = (x: number, y: number) => {
     if (!canvasRef.current) return;
 
     const rect = canvasRef.current.getBoundingClientRect();
 
     clearCanvas(canvasRef.current);
-    coords.x1 = ev.clientX - rect.x;
-    coords.y1 = ev.clientY - rect.y;
+    coords.x1 = x - rect.x;
+    coords.y1 = y - rect.y;
     setCoords(coords);
 
-    //createLine(canvasRef.current, coords, { width: 1, color: "rgba(255, 0, 0, 1)" });
     createShadow(canvasRef.current, coords, { width: 1, color: "rgba(255, 0, 0, 1)" });
-  };
+  }
 
   useEffect(() => {
     window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("touchmove", onTouchMove);
     return () => window.removeEventListener("mousemove", onMouseMove);
   }, []);
 
