@@ -1,6 +1,6 @@
 "use client";
 
-import { Coords, clearCanvas, createLine } from "@/core/canvas/CanvasFunctions";
+import { Coords, clearCanvas, createLine, createShadow } from "@/core/canvas/CanvasFunctions";
 import { useEffect, useRef, useState } from "react";
 
 export default function Test() {
@@ -17,7 +17,7 @@ export default function Test() {
 
   const onMouseMove = (ev: MouseEvent) => {
     if (!canvasRef.current) return;
-    
+
     const rect = canvasRef.current.getBoundingClientRect();
 
     clearCanvas(canvasRef.current);
@@ -25,7 +25,8 @@ export default function Test() {
     coords.y1 = ev.clientY - rect.y;
     setCoords(coords);
 
-    createLine(canvasRef.current, coords);
+    //createLine(canvasRef.current, coords, { width: 1, color: "rgba(255, 0, 0, 1)" });
+    createShadow(canvasRef.current, coords, { width: 1, color: "rgba(255, 0, 0, 1)" });
   };
 
   useEffect(() => {
