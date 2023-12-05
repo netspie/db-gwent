@@ -1,13 +1,11 @@
 'use client'
 
 import Header from "@/components/Header";
-import { useAppContext } from "@/context";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function Home() {
-  const  { hello } = useAppContext()
   const [loading, setLoading] = useState(false)
 
   const fetchDataFromApi = async () => {

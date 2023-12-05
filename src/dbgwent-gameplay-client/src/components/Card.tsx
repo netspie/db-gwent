@@ -65,7 +65,7 @@ export default function Card(props: CardProps) {
     window.addEventListener("keypress", stopRowSelection);
   };
 
-  const makeInteractable = (
+  const clone = (
     oldRef: RefObject<HTMLElement>,
     x: number,
     y: number,
@@ -132,7 +132,7 @@ export default function Card(props: CardProps) {
 
     stopRowSelection();
 
-    makeInteractable(
+    clone(
       cardRef,
       indicationX - cardRef.current.offsetWidth / 2,
       indicationY,
@@ -145,7 +145,7 @@ export default function Card(props: CardProps) {
   }, [hasIndicatedRow]);
 
   const getIconPath = () => {
-    console.log('points - ' + props.points)
+    console.log("points - " + props.points);
     switch (props.rowType) {
       case RowType.Melee:
         return "/icons/punch.png";
@@ -181,46 +181,48 @@ export default function Card(props: CardProps) {
           />
         )}
 
-        <div className="absolute h-full w-[45%] from-black bg-gradient-to-r opacity-70"></div>
-
         {!props.isReversed && (
-          <div className="absolute left-[4%] top-[3%] h-full w-full flex flex-col gap-1 ">
-            <div
-              className="points relative  rounded-full max-w-[20%]"
-              style={{ aspectRatio: 1 / 1 }}
-            >
-              <span
-                className="absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 text-sm/[12px] font-bold select-none text-white"
-                style={{ fontSize: "1.5cqh" }}
+          <>
+            <div className="absolute left-[4%] top-[3%] h-full w-full flex flex-col gap-1 ">
+              <div
+                className="points relative bg-black bg-opacity-80 rounded-md max-w-[20%]"
+                style={{ aspectRatio: 1 / 1 }}
               >
-                { props.points && props.points }
-              </span>
+                <span
+                  className="absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 text-sm/[12px] font-bold select-none text-white"
+                  style={{ fontSize: "1.5cqh" }}
+                >
+                  {props.points && props.points}
+                </span>
+              </div>
             </div>
-            <div
-              className={`skill relative bg-black rounded-sm max-w-[20%] flex justify-center items-center bg-opacity-0`}
-              style={{ aspectRatio: 1 / 1 }}
-            >
-              <Image
-                src={`${getIconPath()}`}
-                alt="Dope"
-                layout="fill"
-                objectFit="cover"
-                quality={2}
-              />
+            <div className="absolute h-[20%] bottom-0 left-0 w-full flex justify-end from-black bg-gradient-to-t ">
+              <div
+                className={`skill relative  rounded-sm h-full flex justify-center items-center `}
+                style={{ aspectRatio: 1 / 1 }}
+              >
+                <Image
+                  src={`${getIconPath()}`}
+                  alt="Dope"
+                  layout="fill"
+                  objectFit="cover"
+                  quality={2}
+                />
+              </div>
+              <div
+                className={`skill relative bg-black rounded-sm h-full flex justify-center items-center bg-opacity-0`}
+                style={{ aspectRatio: 1 / 1 }}
+              >
+                <Image
+                  src={`${getIconPath()}`}
+                  alt="Dope"
+                  layout="fill"
+                  objectFit="cover"
+                  quality={2}
+                />
+              </div>
             </div>
-            <div
-              className={`skill relative bg-black rounded-sm max-w-[20%] flex justify-center items-center bg-opacity-0`}
-              style={{ aspectRatio: 1 / 1 }}
-            >
-              <Image
-                src={`${getIconPath()}`}
-                alt="Dope"
-                layout="fill"
-                objectFit="cover"
-                quality={2}
-              />
-            </div>
-          </div>
+          </>
         )}
         {props.isReversed && props.count && (
           <div
