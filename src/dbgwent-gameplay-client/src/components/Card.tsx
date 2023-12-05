@@ -145,7 +145,6 @@ export default function Card(props: CardProps) {
   }, [hasIndicatedRow]);
 
   const getIconPath = () => {
-    console.log("points - " + props.points);
     switch (props.rowType) {
       case RowType.Melee:
         return "/icons/punch.png";
