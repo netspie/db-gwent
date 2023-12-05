@@ -153,6 +153,8 @@ export default function Card(props: CardProps) {
         return "/icons/distant-attack.png";
       case RowType.Huge:
         return "/icons/huge-attack.png";
+      case RowType.MeleeOrDistant:
+        return "/icons/melee-or-distant.png"
     }
   };
 

@@ -1,6 +1,7 @@
 export enum RowType {
   Melee,
   Distant,
+  MeleeOrDistant,
   Huge
 }
 

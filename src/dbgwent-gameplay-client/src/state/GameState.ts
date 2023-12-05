@@ -15,7 +15,7 @@ const cardsData: CardVM[] = [
   { id: 11, points: 3, imagePath:"brolly-strike.png", rowType: RowType.Melee },
   { id: 12, points: 2, imagePath:"17-shield-1.jpg", rowType: RowType.Melee },
   { id: 13, points: 3, imagePath:"gotenks-kamikaze-1.png", rowType: RowType.Distant },
-  { id: 14, points: 2, imagePath:"bulma.jpg", rowType: RowType.Melee },
+  { id: 14, points: 2, imagePath:"bulma.jpg", rowType: RowType.MeleeOrDistant },
   { id: 15, points: 1, imagePath:"ub-blast.png", rowType: RowType.Distant },
 ]
 

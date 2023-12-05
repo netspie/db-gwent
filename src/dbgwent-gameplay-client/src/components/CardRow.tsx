@@ -18,7 +18,22 @@ export default function CardRow(props: CardRowProps) {
   const { isSelected, setSelected, selectedCard } = useCardSelectionState();
   const { hasIndicatedRow, setIndicatedRow } = useCardRowIndicatedState();
 
-  const isAllowedToSelect = () => selectedCard && isSelected && props.rowType === selectedCard.rowType && props.sideType === SideType.Player
+  const isAllowedToSelect = () => {
+    if (selectedCard?.rowType === RowType.MeleeOrDistant) {
+      return (
+        isSelected &&
+        (props.rowType === RowType.Melee ||
+          props.rowType === RowType.Distant) &&
+        props.sideType === SideType.Player
+      );
+    }
+
+    return (
+      isSelected &&
+      props.rowType === selectedCard?.rowType &&
+      props.sideType === SideType.Player
+    );
+  };
 
   return (
     <div
@@ -27,11 +42,13 @@ export default function CardRow(props: CardRowProps) {
         isAllowedToSelect() && "cursor-pointer bg-gray-100 hover:bg-gray-200"
       }`}
       onClick={() => {
-        if (!isSelected || !ref.current || !selectedCard || props.rowType !== selectedCard.rowType || props.sideType !== SideType.Player) return;
+        if (!ref.current || !isAllowedToSelect())
+          return;
+        
         const rect = ref.current.getBoundingClientRect();
         setIndicatedRow(
           true,
-          selectedCard.id,
+          selectedCard?.id,
           rect.left + rect.width / 2,
           rect.top,
           props.index
