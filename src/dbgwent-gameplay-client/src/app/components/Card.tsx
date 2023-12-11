@@ -1,9 +1,9 @@
 "use client";
 
 import { LocationType, RowType } from "@/app/types/types";
-import { useCardRowIndicatedState } from "@/state/CardRowIndicatedState";
-import { useCardSelectionState } from "@/state/CardSelectedState";
-import { useGameState } from "@/state/GameState";
+import { useCardRowIndicatedState } from "@/app/state/CardRowIndicatedState";
+import { useCardSelectionState } from "@/app/state/CardSelectedState";
+import { useGameState } from "@/app/state/GameState";
 import Image from "next/image";
 import { useRef, useState, useEffect, RefObject } from "react";
 

@@ -1,4 +1,4 @@
-import CardBig from "@/components/CardBig";
+import CardBig from "@/app/components/CardBig";
 
 export default function CardBigPage() {
     return (

@@ -1,12 +1,12 @@
 "use client";
 
 import { LocationType, RowType, SideType } from "@/app/types/types";
-import Card from "@/components/Card";
-import CardRow from "@/components/CardRow";
-import CardRowBottom from "@/components/CardRowBottom";
-import CardRowPool from "@/components/CardRowPool";
-import HeroPanel from "@/components/HeroPanel";
-import { useGameState } from "@/state/GameState";
+import Card from "@/app/components/Card";
+import CardRow from "@/app/components/CardRow";
+import CardRowBottom from "@/app/components/CardRowBottom";
+import CardRowPool from "@/app/components/CardRowPool";
+import HeroPanel from "@/app/components/HeroPanel";
+import { useGameState } from "@/app/state/GameState";
 import { useState, useEffect, useRef } from "react";
 
 export default function Game() {

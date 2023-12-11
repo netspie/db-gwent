@@ -1,8 +1,8 @@
 "use client";
 
 import { RowType, SideType } from "@/app/types/types";
-import { useCardRowIndicatedState } from "@/state/CardRowIndicatedState";
-import { useCardSelectionState } from "@/state/CardSelectedState";
+import { useCardRowIndicatedState } from "@/app/state/CardRowIndicatedState";
+import { useCardSelectionState } from "@/app/state/CardSelectedState";
 import { useRef, useState, useEffect } from "react";
 
 type CardRowProps = {
