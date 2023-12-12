@@ -1,25 +1,15 @@
-package entities
+package com.entities
 
-import basic.isAnyOf
+import com.basic.isAnyOf
 
 enum CardType:
-  case Leader
-  case Hero
-  case Unit
-  case Special
-  case Weather
+  case Leader, Hero, Unit, Special, Weather
 
 enum CardRowType:
-  case Close
-  case Ranged
-  case CloseOrRange
-  case Siege
+  case Close, Ranged, CloseOrRange, Siege
 
 enum TargetRowType:
-  case Any
-  case Close
-  case Ranged
-  case Siege
+  case Any, Close, Ranged, Siege
 
 extension (source: CardRowType)
   def is(target: TargetRowType): Boolean =

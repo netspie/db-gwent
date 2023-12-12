@@ -1,4 +1,4 @@
-package entities
+package com.entities
 
 case class Turn(players: List[PlayerId], var next: PlayerId):
   def run(playerId: PlayerId, f: () => Boolean): Boolean =

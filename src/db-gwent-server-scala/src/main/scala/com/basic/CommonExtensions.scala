@@ -1,4 +1,4 @@
-package basic
+package com.basic
 
 extension (c: Unit) def $true: Boolean = true
 extension (c: Unit) def $false: Boolean = false
