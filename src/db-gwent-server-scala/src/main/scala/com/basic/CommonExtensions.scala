@@ -17,3 +17,8 @@ extension[T] (element: T)
 extension[T] (source: Iterable[T])
   def containsAny(elements: T*): Boolean =
     elements.exists(el => source.exists(x => x == el))
+
+extension[T] (option: Option[T] )
+  def ifOkThen(f: (t: T) => Boolean): Boolean =
+    if (option.isEmpty) false
+    else f(option.get)
