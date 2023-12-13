@@ -11,14 +11,15 @@ enum CardRowType:
 enum TargetRowType:
   case Any, Close, Ranged, Siege
 
-extension (source: CardRowType)
-  def is(target: TargetRowType): Boolean =
+extension (source: TargetRowType)
+  def is(target: CardRowType): Boolean =
     source match
-      case CardRowType.Close if target.isAnyOf(TargetRowType.Close, TargetRowType.Any) => true
-      case CardRowType.Ranged if target.isAnyOf(TargetRowType.Ranged, TargetRowType.Any) => true
-      case CardRowType.CloseOrRange if target.isAnyOf(TargetRowType.Ranged, TargetRowType.Close, TargetRowType.Any) => true
-      case CardRowType.Siege if target.isAnyOf(TargetRowType.Siege, TargetRowType.Any) => true
+      case TargetRowType.Any => true
+      case TargetRowType.Close | TargetRowType.Ranged if target == CardRowType.CloseOrRange => true
+      case TargetRowType.Close if target == CardRowType.Close => true
+      case TargetRowType.Ranged if target == CardRowType.Ranged => true
+      case TargetRowType.Siege if target == CardRowType.Siege => true
       case _ => false
 
-extension (source: TargetRowType)
-  def is(target: CardRowType): Boolean = target.is(source)
+extension (source: CardRowType)
+  def is(target: TargetRowType): Boolean = target.is(source)
