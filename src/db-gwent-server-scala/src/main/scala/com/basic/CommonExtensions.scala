@@ -19,6 +19,15 @@ extension[T] (source: Iterable[T])
     elements.exists(el => source.exists(x => x == el))
 
 extension[T] (option: Option[T] )
-  def ifOkThen(f: (t: T) => Boolean): Boolean =
-    if (option.isEmpty) false
-    else f(option.get)
+  def ifOkThen(f: (t: T) => Boolean): Option[T] =
+    if (option.isDefined && f(option.get))
+      option
+    else
+      None
+
+extension[T] (option: Option[T] )
+  def ifNoThen(f: () => Option[T]): Option[T] =
+    if (option.isEmpty)
+      f(); None
+    else
+      option

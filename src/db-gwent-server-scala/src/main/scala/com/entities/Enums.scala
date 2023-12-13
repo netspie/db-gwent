@@ -6,7 +6,7 @@ enum CardType:
   case Leader, Hero, Unit, Special, Weather
 
 enum CardRowType:
-  case Close, Ranged, CloseOrRange, Siege
+  case Close, Ranged, CloseOrRange, Siege, Back, Any
 
 enum TargetRowType:
   case Any, Close, Ranged, Siege
