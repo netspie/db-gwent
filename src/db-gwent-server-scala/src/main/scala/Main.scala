@@ -1,3 +1,4 @@
+import com.basic.Entity
 import com.entities.{Card, CardId, CardRowType, CardType, Game, GameId, Player, PlayerId, TargetRowType}
 
 import scala.collection.mutable.ListBuffer

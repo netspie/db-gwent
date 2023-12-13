@@ -7,11 +7,13 @@ case class PlayerId(value: String)
 case class Player(
    id: PlayerId,
    idleCards: ListBuffer[Card] = ListBuffer(),
-   handCards: ListBuffer[Card] = ListBuffer()) extends Entity[PlayerId]:
+   handCards: ListBuffer[Card] = ListBuffer(),
+   battlefield: Battlefield = Battlefield()) extends Entity[PlayerId]:
 
   def playCard(cardId: CardId, row: TargetRowType = null): Boolean =
     idleCards
       .removeIf(hasSameId(cardId))
-      .ifOkThen: card =>
-        handCards.addOne(card)
-        row.is(card.row)
+      .ifOkThen:
+        card =>
+          handCards.addOne(card)
+          row.is(card.row)
