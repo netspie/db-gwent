@@ -17,7 +17,12 @@ case class Card(
 
   def pointsTo1(id: String = ""): Boolean =
     points.modifiers.addOne:
-      PointGroupModifier(1, PointGroupModifierType.Constant, id)
+      PointGroupModifier(1, PointGroupModifierType.Constant, id, () => points.originalValue)
+    .isEmpty
+
+  def multiplyPoints(id: String): Boolean =
+    points.modifiers.addOne:
+      PointGroupModifier($type = PointGroupModifierType.MultiplyOriginal, id = id, () => points.originalValue)
     .isEmpty
 
   def removeModifier(id: String): Boolean =

@@ -1,5 +1,5 @@
 import com.basic.uuid
-import com.entities.abilities.RowCardsToOne_Ability
+import com.entities.abilities.{RowCardsToOne_Ability, TightBond_Ability}
 import com.entities.{Card, CardId, CardRowType, CardType, Game, GameId, Player, PlayerId, PointGroup, TargetRowType}
 
 import java.util.UUID
@@ -50,9 +50,9 @@ object Main extends App:
 
   // Northern Realms Gwent deck / Earth Heroes
   val BlueStripesCommando = new Card(
-    CardId(s"clear-weather-$uuid"),
-    "Clear Weather",
+    CardId(s"blue-stripes-commando-$uuid"),
+    "Blue Stripes Commando",
     CardType.Weather,
     CardRowType.Any,
     points = PointGroup(4),
-    abilities = Array(RowCardsToOne_Ability(CardRowType.Any)))
+    abilities = Array(TightBond_Ability()))

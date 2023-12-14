@@ -11,12 +11,19 @@ case class Game(
   def playCard(playerId: PlayerId, cardId: CardId, row: TargetRowType = null): Boolean =
     turn.run(playerId): () =>
       players
-        .getOfId(playerId)
-        .ifOkThen:
-          getEnemyAndPlayCard(cardId, row)
-        .isDefined
+        .getOfId(playerId) match
+          case Some(player) =>
+            getEnemyAndPlayCard(player, cardId, row)
+            toNextRound(player, cardId)
+          case None => false
 
-  private def getEnemyAndPlayCard(cardId: CardId, row: TargetRowType = null)(player: Player): Boolean =
+  private def toNextRound(player: Player, cardId: CardId): Boolean =
+    (player.getCard(cardId), players.getNotOfId(player.id)) match
+      case (Some(card), Some(otherPlayer)) =>
+        card.abilities.forall(a => a.apply(card, player, otherPlayer))
+      case _ => false
+
+  private def getEnemyAndPlayCard(player: Player, cardId: CardId, row: TargetRowType = null): Boolean =
     players.getNotOfId(player.id) match
       case Some(otherPlayer) => player.playCard(cardId, row, otherPlayer)
       case _ => false

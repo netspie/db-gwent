@@ -13,3 +13,8 @@ case class BattlefieldRow(
   def removeModifiersOfId(id: String): Boolean =
     cards.forall:
       card => card.removeModifier(id)
+
+  def multiplyPointsOfCardsByName(name: String, id: String): Boolean =
+    cards
+      .filter(card => card.name == name)
+      .forall(card => card.multiplyPoints(id))

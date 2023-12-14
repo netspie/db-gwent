@@ -29,10 +29,16 @@ case class Player(
     battlefield.pointsTo1(row, id)
 
   def getCard(cardId: CardId): Option[Card] =
-    cardId.findEntityIn(leaderCard, idleCards, handCards)
+    cardId.findEntityIn(leaderCard, idleCards, handCards, battlefield.getCards)
+
+  def getBattlingCardsOfName(name: String): Array[Card] =
+    battlefield.getCardsOfName(name)
 
   def getPlayableCard(cardId: CardId): Option[Card] =
     cardId.findEntityIn(leaderCard, handCards)
+
+  def multiplyPointsOfBattleCardsByName(name: String, rowType: CardRowType, id: String): Boolean =
+    battlefield.multiplyPointsOfCardsByName(name, rowType, id)
 
   def removeCardModifiersOfId(id: String): Boolean =
     false
