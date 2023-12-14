@@ -1,11 +1,19 @@
 package com.entities
 
+import removeAndGetIf
+
 class Player(
     val id: PlayerId,
     val leaderCard: Card,
     val idleCards: MutableList<Card> = mutableListOf(),
     val handCards: MutableList<Card> = mutableListOf(),
     val battlefield: Battlefield = Battlefield()) {
+
+    fun playCard(cardId: CardId, row: RowType? = null, enemy: Player): Boolean {
+        val card = idleCards.removeAndGetIf{ it.id == cardId } ?: return false
+        handCards.add(card)
+        return true
+    }
 
     fun battleCardsTo1(row: RowType, id: String = ""): Boolean =
         battlefield.pointsTo1(row, id)
