@@ -25,11 +25,17 @@ case class Player(
         players.forall(player => player.applyWeather(card))
       case _ => false
 
+  def battleCardsTo1(row: CardRowType, id: String = ""): Boolean =
+    battlefield.pointsTo1(row, id)
+
   def getCard(cardId: CardId): Option[Card] =
     cardId.findEntityIn(leaderCard, idleCards, handCards)
 
   def getPlayableCard(cardId: CardId): Option[Card] =
     cardId.findEntityIn(leaderCard, handCards)
+
+  def removeCardModifiersOfId(id: String): Boolean =
+    false
 
   private def applyWeather(card: Card): Boolean =
     true

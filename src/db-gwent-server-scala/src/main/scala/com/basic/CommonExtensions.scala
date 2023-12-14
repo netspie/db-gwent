@@ -1,5 +1,7 @@
 package com.basic
 
+import java.util.UUID
+
 extension (c: Unit) def $true: Boolean = true
 extension (c: Unit) def $false: Boolean = false
 
@@ -31,3 +33,5 @@ extension[T] (option: Option[T] )
       f(); None
     else
       option
+
+def uuid: String = UUID.randomUUID.toString
