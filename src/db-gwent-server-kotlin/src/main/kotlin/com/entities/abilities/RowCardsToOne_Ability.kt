@@ -7,9 +7,9 @@ import com.entities.RowType
 class RowCardsToOne_Ability(
     val row: RowType) : Ability {
 
-    override fun apply(card: Card, player: Player, enemy: Player): Boolean =
-        arrayOf(player, enemy).all{
-            it.battleCardsTo1(row, RowCardsToOne_Ability.Id)
+    override fun apply(card: Card, thisPlayer: Player, nextPlayer: Player): Boolean =
+        arrayOf(thisPlayer, nextPlayer).all{
+            it.battleCardsTo1(row, Id)
         }
 
     companion object {

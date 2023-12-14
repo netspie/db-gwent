@@ -15,10 +15,15 @@ class Card(
             PointGroupModifier(
                 value = 1, PointGroupModifierType.Constant, id) { points.originalValue })
 
-    fun multiplyPoints(id: String): Boolean =
+    fun addOriginalPoints(id: String): Boolean =
         points.modifiers.add(
             PointGroupModifier(
-                value = 1, PointGroupModifierType.Constant, id) { points.originalValue })
+                value = 1, PointGroupModifierType.MultiplyOriginal, id) { points.originalValue })
+
+    fun multiplyPoints(value: Int, id: String): Boolean =
+        points.modifiers.add(
+            PointGroupModifier(
+                value, PointGroupModifierType.Multiply, id) { points.originalValue })
 
     fun removeModifier(id: String): Boolean =
         points.modifiers.removeIf { it.id == id }

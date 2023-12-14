@@ -26,11 +26,26 @@ class Battlefield(
     fun getCardsOfName(name: String): Array<Card> =
         getCards().filter{ it.name == name }.toTypedArray()
 
-    fun multiplyPointsOfCardsByName(name: String, row: RowType, id: String): Boolean =
+    fun addOriginalPointsToCardsByName(name: String, row: RowType, id: String): Boolean =
         when (row) {
-            RowType.Close -> closeRow.multiplyPointsOfCardsByName(name, id)
-            RowType.Ranged -> rangedRow.multiplyPointsOfCardsByName(name, id)
-            RowType.Siege -> siegeRow.multiplyPointsOfCardsByName(name, id)
+            RowType.Close -> closeRow.addOriginalPointsToCards(name, id)
+            RowType.Ranged -> rangedRow.addOriginalPointsToCards(name, id)
+            RowType.Siege -> siegeRow.addOriginalPointsToCards(name, id)
             else -> false
         }
+
+    fun multiplyPointsOfCards(factor: Int, row: RowType, id: String): Boolean =
+        when (row) {
+            RowType.Close -> closeRow.multiplyPointsOfCards(factor, id)
+            RowType.Ranged -> rangedRow.multiplyPointsOfCards(factor, id)
+            RowType.Siege -> siegeRow.multiplyPointsOfCards(factor, id)
+            else -> false
+        }
+
+    fun getCardRow(cardId: CardId): RowType {
+        if (closeRow.contains(cardId)) return RowType.Close
+        if (rangedRow.contains(cardId)) return RowType.Ranged
+        if (siegeRow.contains(cardId)) return RowType.Siege
+        return RowType.Any
     }
+}

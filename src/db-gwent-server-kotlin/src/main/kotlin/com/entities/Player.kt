@@ -15,8 +15,14 @@ class Player(
         return true
     }
 
+    fun multiplyCardRowPoints(cardId: CardId, factor: Int, id: String = ""): Boolean =
+        battlefield.multiplyPointsOfCards(factor, getCardRow(cardId), id)
+
     fun battleCardsTo1(row: RowType, id: String = ""): Boolean =
         battlefield.pointsTo1(row, id)
+
+    fun getCardRow(cardId: CardId): RowType =
+        battlefield.getCardRow(cardId)
 
     fun getCard(cardId: CardId): Card? =
         (idleCards + handCards + battlefield.getCards() + leaderCard).find { it.id == cardId }
@@ -28,7 +34,7 @@ class Player(
         battlefield.getCardsOfName(name)
 
     fun multiplyPointsOfBattleCardsByName(name: String, rowType: RowType, id: String): Boolean =
-        battlefield.multiplyPointsOfCardsByName(name, rowType, id)
+        battlefield.addOriginalPointsToCardsByName(name, rowType, id)
 
     fun removeCardModifiersOfId(id: String): Boolean =
         battlefield.removeCardModifiersOfId(id)

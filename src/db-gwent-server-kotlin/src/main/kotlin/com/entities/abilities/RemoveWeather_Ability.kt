@@ -5,8 +5,8 @@ import com.entities.Player
 
 class RemoveWeather_Ability : Ability {
 
-    override fun apply(card: Card, player: Player, enemy: Player): Boolean =
-        arrayOf(player, enemy).all{
+    override fun apply(card: Card, thisPlayer: Player, nextPlayer: Player): Boolean =
+        arrayOf(thisPlayer, nextPlayer).all{
             it.removeCardModifiersOfId(RowCardsToOne_Ability.Id)
         }
 
