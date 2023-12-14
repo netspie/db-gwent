@@ -1,6 +1,6 @@
 import com.basic.uuid
-import com.entities.abilities.RowCardsTo1_Ability
-import com.entities.{Card, CardId, CardRowType, CardType, Game, GameId, Player, PlayerId, TargetRowType}
+import com.entities.abilities.RowCardsToOne_Ability
+import com.entities.{Card, CardId, CardRowType, CardType, Game, GameId, Player, PlayerId, PointGroup, TargetRowType}
 
 import java.util.UUID
 import scala.collection.mutable.ListBuffer
@@ -25,18 +25,34 @@ object Main extends App:
     "Biting Frost",
     CardType.Weather,
     CardRowType.Any,
-    abilities = Array(RowCardsTo1_Ability(CardRowType.Close)))
+    abilities = Array(RowCardsToOne_Ability(CardRowType.Close)))
 
   val ImpenetrableFog = new Card(
     CardId(s"impenetrable-fog-$uuid"),
     "Impenetrable Fog",
     CardType.Weather,
     CardRowType.Any,
-    abilities = Array(RowCardsTo1_Ability(CardRowType.Ranged)))
+    abilities = Array(RowCardsToOne_Ability(CardRowType.Ranged)))
 
   val SkelligeStorm = new Card(
     CardId(s"skellige-storm-$uuid"),
     "Skellige Storm",
     CardType.Weather,
     CardRowType.Any,
-    abilities = Array(RowCardsTo1_Ability(CardRowType.Siege)))
+    abilities = Array(RowCardsToOne_Ability(CardRowType.Siege)))
+
+  val ClearWeather = new Card(
+    CardId(s"clear-weather-$uuid"),
+    "Clear Weather",
+    CardType.Weather,
+    CardRowType.Any,
+    abilities = Array(RowCardsToOne_Ability(CardRowType.Any)))
+
+  // Northern Realms Gwent deck / Earth Heroes
+  val BlueStripesCommando = new Card(
+    CardId(s"clear-weather-$uuid"),
+    "Clear Weather",
+    CardType.Weather,
+    CardRowType.Any,
+    points = PointGroup(4),
+    abilities = Array(RowCardsToOne_Ability(CardRowType.Any)))
