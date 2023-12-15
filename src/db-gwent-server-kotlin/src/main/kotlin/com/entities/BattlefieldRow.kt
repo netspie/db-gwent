@@ -1,8 +1,13 @@
 package com.entities
 
 class BattlefieldRow(
-    val cards: MutableList<Card> = mutableListOf(),
-    modifierCard: Card? = null) {
+    private val cards: MutableList<Card> = mutableListOf(),
+    var modifierCard: Card? = null) {
+
+    fun cards(): Array<Card> = cards.toTypedArray()
+
+    fun addCard(card: Card): Boolean =
+        cards.add(card)
 
     fun pointsTo1(id: String = ""): Boolean =
         cards.all{ it.pointsTo1() }

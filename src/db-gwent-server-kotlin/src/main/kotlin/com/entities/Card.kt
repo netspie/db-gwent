@@ -8,7 +8,8 @@ class Card(
     val type: CardType,
     val row: RowType,
     val points: PointGroup = PointGroup(),
-    val abilities: Array<Ability>) {
+    val abilities: Array<Ability>,
+    val summonable: Boolean = false) {
 
     fun pointsTo1(id: String = ""): Boolean =
         points.modifiers.add(
@@ -27,6 +28,7 @@ class Card(
 
     fun removeModifier(id: String): Boolean =
         points.modifiers.removeIf { it.id == id }
+
 }
 
 data class CardId(val value: String)

@@ -1,9 +1,17 @@
 package com.entities
 
 class Battlefield(
-    val closeRow: BattlefieldRow = BattlefieldRow(),
-    val rangedRow: BattlefieldRow = BattlefieldRow(),
-    val siegeRow: BattlefieldRow = BattlefieldRow()) {
+    private val closeRow: BattlefieldRow = BattlefieldRow(),
+    private val rangedRow: BattlefieldRow = BattlefieldRow(),
+    private val siegeRow: BattlefieldRow = BattlefieldRow()) {
+
+    fun addCard(card: Card, row: RowType): Boolean =
+        when (row) {
+            RowType.Close -> closeRow.addCard(card)
+            RowType.Ranged -> rangedRow.addCard(card)
+            RowType.Siege -> siegeRow.addCard(card)
+            else -> false
+        }
 
     fun pointsTo1(row: RowType, id: String = ""): Boolean =
         when (row) {
@@ -19,9 +27,12 @@ class Battlefield(
         }
 
     fun getCards(): Array<Card> =
-        closeRow.cards.toTypedArray() +
-        rangedRow.cards.toTypedArray() +
-        siegeRow.cards.toTypedArray()
+        closeRow.cards() +
+        rangedRow.cards() +
+        siegeRow.cards()
+
+    fun contains(cardId: CardId): Boolean =
+        getCards().any{ it.id == cardId }
 
     fun getCardsOfName(name: String): Array<Card> =
         getCards().filter{ it.name == name }.toTypedArray()

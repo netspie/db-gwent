@@ -11,6 +11,8 @@ fun main() {
     val game = Game(GameId("game-1"), listOf(player1, player2))
     println(game.playCard(player1.id, ImpenetrableFog.id))
     println(game.playCard(player1.id, BitingFrost.id))
+
+    println(!BitingFrost)
 }
 
 fun uuid(): String = UUID.randomUUID().toString()

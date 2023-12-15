@@ -2,6 +2,9 @@ package com.entities
 
 import removeAndGetIf
 
+fun Any?.notNull(): Boolean = this != null
+inline fun Any?.ok(): Boolean = this != null
+
 class Player(
     val id: PlayerId,
     val leaderCard: Card,
@@ -32,6 +35,14 @@ class Player(
 
     fun getBattlingCardsOfName(name: String): Array<Card> =
         battlefield.getCardsOfName(name)
+
+    fun containsBattlingCard(cardId: CardId): Boolean =
+        battlefield.contains(cardId)
+
+    fun summonCard(row: RowType): Card? =
+        idleCards
+            .find{ it.summonable }
+            .also{ it != null && battlefield.addCard(it, row) }
 
     fun multiplyPointsOfBattleCardsByName(name: String, rowType: RowType, id: String): Boolean =
         battlefield.addOriginalPointsToCardsByName(name, rowType, id)
